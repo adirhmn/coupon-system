@@ -261,7 +261,14 @@ Install Docker by following the instructions for your operating system from [her
 
 #### API Endpoints
 
-Explore and interact with the Coupon System API using the following endpoints. You can use tools like [Postman](https://www.postman.com/) for a convenient API testing experience.
+Explore and interact with the Coupon System API using the following endpoints.
+| Method | Endpoint | Description |
+|-------:|-----------------------|---------------------------------|
+| POST | /api/coupons | Create a new coupon |
+| POST | /api/coupons/claim | Claim a coupon |
+| GET | /api/coupons/{name} | Get coupon details by name |
+
+You can use tools like [Postman](https://www.postman.com/) for a convenient API testing experience.
 
 #### Postman Collection
 
