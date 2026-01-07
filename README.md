@@ -282,7 +282,6 @@ To simplify API testing, you can use the provided Postman collection.
 4. **Explore and Test:**
 
    - Browse the available requests in the Coupon System API collection.
-   - Update variables like token regularly when the validity period expires.
 
 5. **Execute Requests:**
    - Execute requests to create coupon, claim coupon, and get details.
