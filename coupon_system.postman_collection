@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "75f9304a-418d-4663-800b-8d2f69709bae",
+		"name": "Coupon System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11731835"
+	},
+	"item": [
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}ping",
+					"host": [
+						"{{localhost}}ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create coupon",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"PROMO_SUPER\",\r\n    \"amount\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}coupons",
+					"host": [
+						"{{localhost}}coupons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get coupon details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"PROMO_SUPER_MERIAH\",\r\n    \"amount\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}coupons/PROMO_SUPER",
+					"host": [
+						"{{localhost}}coupons"
+					],
+					"path": [
+						"PROMO_SUPER"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "claim coupon",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"coupon_name\": \"PROMO_SUPER\",\r\n    \"user_id\": \"user_1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}coupons/claim",
+					"host": [
+						"{{localhost}}coupons"
+					],
+					"path": [
+						"claim"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": ""
+		}
+	]
+}

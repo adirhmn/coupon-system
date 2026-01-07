@@ -1,0 +1,61 @@
+version: "3.4"
+
+services:
+  db:
+    image: postgres:14
+    container_name: coupon_db_postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    networks:
+      - coupon_service_network
+    volumes:
+      - dbvol:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    image: migrate/migrate:v4.17.1
+    container_name: coupon_migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./migrations:/migrations
+    networks:
+      - coupon_service_network
+    command: >
+      -path /migrations
+      -database postgres://${DB_USER}:${DB_PASSWORD}@db:${DB_PORT}/${DB_NAME}?sslmode=disable
+      up
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: coupon_go_app
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    networks:
+      - coupon_service_network
+    ports:
+      - "${PORT}:${PORT}"
+
+networks:
+  coupon_service_network:
+    name: "coupon_service_network"
+
+volumes:
+  dbvol: {}
