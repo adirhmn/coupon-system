@@ -270,7 +270,7 @@ Explore and interact with the Coupon System API using the following endpoints.
 
 You can use tools like [Postman](https://www.postman.com/) for a convenient API testing experience.
 
-#### Postman Collection
+#### Testing Using Postman Collection
 
 To simplify API testing, you can use the provided Postman collection.
 
@@ -294,6 +294,45 @@ To simplify API testing, you can use the provided Postman collection.
    - Execute requests to create coupon, claim coupon, and get details.
 
 _For screenshot, please look up to the [Documentation](https://github.com/adirhmn/coupon-system/tree/main/documentation)_
+
+#### Testing Using CURL
+
+You can test the Coupon System API directly using `curl` from your terminal.
+
+Make sure the application is running at:
+
+```text
+http://localhost:8080
+```
+
+**Create Coupon**
+
+```
+curl -X POST http://localhost:8080/api/coupons \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "PROMO_SUPER",
+    "amount": 5
+  }'
+```
+
+**Claim Coupon**
+
+```
+curl -X POST http://localhost:8080/api/coupons/claim \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": "user_1",
+    "coupon_name": "PROMO_SUPER"
+  }'
+```
+
+**Get Coupon Details**
+
+```
+curl -X GET http://localhost:8080/api/coupons/PROMO_SUPER
+
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
